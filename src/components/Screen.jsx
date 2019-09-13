@@ -2,8 +2,9 @@ import React, { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { types, debounce } from '../seed';
 import Question from './Question';
+import Criteria from './Criteria';
 
-function Screen({ screen, si, moveS, moveQ }) {
+function Screen({ screen, si, moveS, moveQ, addCrit, delCrit }) {
   const ref = useRef(null);
   const [, drag] = useDrag({
     item: { type: types.S, hsi: si },
@@ -24,9 +25,11 @@ function Screen({ screen, si, moveS, moveQ }) {
   return (
     <div ref={ref} className="screen">
       <h1>Screen {screen.id}</h1>
-      <h3>{JSON.stringify(screen.criteria)}</h3>
+      <Criteria criteria={screen.criteria} s={si}
+        addCrit={addCrit} delCrit={delCrit} />
       {screen.questions.map((q, i) => (
-        <Question question={q} key={q.id} qi={i} si={si} moveQ={moveQ} />
+        <Question question={q} key={q.id} qi={i} si={si}
+          moveQ={moveQ} addCrit={addCrit} delCrit={delCrit} />
       ))}
     </div>
   );

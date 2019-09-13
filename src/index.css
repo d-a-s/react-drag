@@ -29,3 +29,14 @@ h3 {
   border: 1px solid black;
   margin: .3em;
 }
+
+.crits {
+  display:flex;
+  flex-direction: row;
+}
+
+.crit {
+  border:1px solid black;
+  text-align: center;
+  flex:1 1 0;  
+}
