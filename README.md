@@ -1,3 +1,7 @@
+## Form/Screen/Question drag and drop proof of concept
+
+The validation portion is the main thing here, which is handled in the callback in `components/Form.jsx`, and in `./validate.js`;
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
