@@ -1,0 +1,31 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  border: 1px solid black;
+}
+h1 {
+  background:lightgray;
+  margin:0;
+  text-align:center;
+}
+h3 {
+  text-align:center;
+  margin:.3em 0;
+}
+.screen {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  margin: .3em;
+}
+.question{
+  display:flex;
+  flex-direction: column;
+  flex:1 1 0;
+  border: 1px solid black;
+  margin: .3em;
+}
