@@ -2,6 +2,10 @@
 
 The validation portion is the main thing here, which is handled in the callback in `components/Form.jsx`, and in `./validate.js`;
 
+Can be run via: http://reactdrag-env.farxhez6zq.us-east-2.elasticbeanstalk.com/
+
+-----
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
