@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { addCrit, delCrit } from '../tools/state';
 
-function Criteria({ criteria, s, q, addCrit, delCrit }) {
+function Criteria({ criteria, s, q }) {
   const [{ add, value }, setState] = useState({ add: false, value: '' });
   const addBtn = (
     <button onClick={() => setState({ add: !add })}>[+]</button>

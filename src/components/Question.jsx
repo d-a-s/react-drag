@@ -1,9 +1,10 @@
 import React, { useState, useCallback, useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
-import { types, debounce } from '../seed';
+import { types, debounce } from '../tools/seed';
 import Criteria from './Criteria';
+import { moveQ } from '../tools/state';
 
-function Question({ question: q, qi, si, moveQ, addCrit, delCrit }) {
+function Question({ question: q, qi, si }) {
   const ref = useRef(null);
   const [, drag] = useDrag({
     item: { type: types.Q, hqi: qi, hsi: si },
@@ -27,8 +28,7 @@ function Question({ question: q, qi, si, moveQ, addCrit, delCrit }) {
   return (
     <div ref={ref} className="question">
       <h1>Q {q.id}</h1>
-      <Criteria criteria={q.criteria} s={si} q={qi}
-        addCrit={addCrit} delCrit={delCrit} />
+      <Criteria criteria={q.criteria} s={si} q={qi} />
     </div>
   );
 }

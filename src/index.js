@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import seed from "./seed";
+import seed from "./tools/seed";
 import "./index.css";
 import Form from './components/Form';
 
