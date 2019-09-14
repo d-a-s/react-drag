@@ -1,31 +1,46 @@
 export default function validate(state) {
   const errs = [];
-  const valid = [];
+  const invalid = makeMap(state);
   for (let s of state.screens) {
-    critCheck(s.criteria, valid, [s.id], errs);
+    let loc = `Screen ${s.id}`;
+    critCheck(s.criteria, invalid, loc, errs);
     for (let q of s.questions) {
-      critCheck(q.criteria, valid, [s.id, q.id], errs);
-      valid.push(q.id);
+      let loc2 = loc + `, Q ${q.id}`;
+      critCheck(q.criteria, invalid, loc2, errs);
+      if (invalid[q.id] === true) {
+        invalid[q.id] = false;
+      } else {
+        errs.push(`${loc2} duplicate question. Each question should be unique.`);
+      }
     }
   }
   return errs.join('\n');
 }
 
-function critCheck(criteria, valid, loc, errs) {
-  const invalid = [];
-  if (criteria) {
+function critCheck(criteria, invalid, loc, errs) {
+  const eCrit = [];
+  if (criteria && criteria.length) {
     for (let c of criteria) {
-      if (!valid.find(v => c === v)) {
-        invalid.push(c);
+      if (invalid[c] === true) {
+        eCrit.push(c);
+      } else if (invalid[c] === undefined) {
+        console.log(`${loc} criteria ${c} appears to be from outside form.`);
       }
     }
   }
-  if (invalid.length) {
-    let sq = `scr ${loc[0]}` + (loc.length > 1 ? ` q ${loc[1]}` : '');
-    console.log('sq', sq);
-    let msg = `${sq} invalid criteria. Question(s) ${JSON.stringify(invalid)}`
+  if (eCrit.length) {
+    let msg = `${loc} invalid criteria. Question(s) ${JSON.stringify(eCrit)}`
       + ' must be asked before they can be used as criteria.';
-    console.log('msg', msg);
     errs.push(msg);
   }
+}
+
+function makeMap(state) {
+  const map = {};
+  for (let s of state.screens) {
+    for (let q of s.questions) {
+      map[q.id] = true;
+    }
+  }
+  return map;
 }

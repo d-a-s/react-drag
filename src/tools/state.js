@@ -25,7 +25,7 @@ const valState = (myState, title) => {
     setState(update(myState, ['error', '$set', '']));
     return true;
   } else {
-    errVal = `Aborted! ${title}\n${errVal}`;
+    errVal = `Last operation aborted: ${title}\n${errVal}`;
     setState(update(state, ['error', '$set', errVal]));
     return false;
   }
