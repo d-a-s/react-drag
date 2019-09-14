@@ -1,8 +1,11 @@
 ## Form/Screen/Question drag and drop proof of concept
 
-The validation portion is the main thing here, which is handled in the callback in `components/Form.jsx`, and in `./validate.js`;
+The validation portion is the main thing here, which is handled in `./tools/validate.js`. It is called in `./tools/state.js`, where new state is validated right before performing a `setState` with the new state. 
 
-Can be run via: http://reactdrag-env.farxhez6zq.us-east-2.elasticbeanstalk.com/
+If validation fails, the new state is discarded and an error message is added explaining why the update was aborted.
+
+Can be run via beanstalk here: 
+http://reactdrag-env.farxhez6zq.us-east-2.elasticbeanstalk.com/
 
 -----
 
