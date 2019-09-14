@@ -46,7 +46,8 @@ const seed = {
         { id: 35, criteria: [] }
       ]
     }
-  ]
+  ],
+  error:''
 };
 
 export default seed;

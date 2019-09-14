@@ -40,3 +40,9 @@ h3 {
   text-align: center;
   flex:1 1 0;  
 }
+
+.err {
+  white-space: pre-wrap;
+  background: #f66;
+  padding:1em;
+}

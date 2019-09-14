@@ -19,7 +19,7 @@ function Criteria({ criteria, s, q }) {
   );
   return (
     <div className="crits">
-      {criteria.map((c, i) => (<Criterion c={c} ci={i} s={s} q={q}
+      {criteria.map((c, i) => (<Criterion c={c} key={i} ci={i} s={s} q={q}
         delCrit={delCrit} />))}
       <div className="right">{add ? addForm : addBtn}</div>
     </div>

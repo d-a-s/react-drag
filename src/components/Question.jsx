@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from "react";
+import React, { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { types, debounce } from '../tools/seed';
 import Criteria from './Criteria';
