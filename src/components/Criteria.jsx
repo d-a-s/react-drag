@@ -1,27 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import { addCrit, delCrit } from '../tools/state';
+import update, { useState } from '../tools/immutability';
 
 function Criteria({ criteria, s, q }) {
-  const [{ add, value }, setState] = useState({ add: false, value: '' });
-  const addBtn = (
-    <button onClick={() => setState({ add: !add })}>[+]</button>
-  );
-  const addForm = (
-    <span>
-      <input value={value}
-        onChange={e => setState({ add: true, value: e.target.value })} />
-      <button onClick={() => {
-        addCrit(parseInt(value), s, q)
-        setState({ add: false });
-      }}>add</button>
-      <button onClick={() => setState({ add: !add })}>[x]</button>
-    </span>
-  );
+  const [{ add, value }, mutState] = useState({ add: false, value: '' });
   return (
     <div className="crits">
       {criteria.map((c, i) => (<Criterion c={c} key={i} ci={i} s={s} q={q}
         delCrit={delCrit} />))}
-      <div className="right">{add ? addForm : addBtn}</div>
+      <div className="right">
+        <EditForm {...{ value, mutState, s, q, add }}
+          onOk={() => addCrit(value, s, q)}>
+          <button>+</button>
+        </EditForm>
+      </div>
     </div>
   );
 }
@@ -38,3 +30,16 @@ function Criterion({ c, ci, s, q, delCrit }) {
 }
 
 export default Criteria;
+
+export function EditForm({ value, mutState, add, children, onOk }) {
+  if (!add) return (<span
+    onClick={() => mutState('add.$set.1')}>{children}</span>);
+  return (<span>
+    <input value={value}
+      onChange={e => mutState(['value', '$set', e.target.value])} />
+    <button onClick={() => {
+      if (onOk()) { mutState('add.$set.'); }
+    }}>ok</button>
+    <button onClick={() => mutState('add.$set.')}>x</button>
+  </span>);
+}

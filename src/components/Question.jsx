@@ -1,10 +1,13 @@
 import React, { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { types, debounce } from '../tools/seed';
-import Criteria from './Criteria';
-import { moveQ } from '../tools/state';
+import Criteria, { EditForm } from './Criteria';
+import { moveQ, editQ } from '../tools/state';
+import { useState } from '../tools/immutability';
 
 function Question({ question: q, qi, si }) {
+  const [{ add, value }, mutState] = useState({ add: false, value: q.id });
+  console.log(add, value);
   const ref = useRef(null);
   const [, drag] = useDrag({
     item: { type: types.Q, hqi: qi, hsi: si },
@@ -27,7 +30,10 @@ function Question({ question: q, qi, si }) {
   drag(drop(ref));
   return (
     <div ref={ref} className="question">
-      <h1>Q {q.id}</h1>
+      <h1>Q
+        <EditForm {...{ add, value, mutState }}
+          onOk={() => editQ(si, qi, value)}
+        >{q.id}</EditForm></h1>
       <Criteria criteria={q.criteria} s={si} q={qi} />
     </div>
   );

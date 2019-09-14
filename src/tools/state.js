@@ -9,6 +9,7 @@ export function useStore(seed) {
   [state, setState] = useState(seed);
   moveS = useCallback(fnMoveS);
   moveQ = useCallback(fnMoveQ);
+  editQ = useCallback(fnEditQ);
   addCrit = useCallback(fnAddCrit);
   delCrit = useCallback(fnDelCrit);
   return state;
@@ -18,6 +19,7 @@ export let moveS;
 export let moveQ;
 export let addCrit;
 export let delCrit;
+export let editQ;
 
 const valState = (myState, title) => {
   let errVal = validate(myState);
@@ -43,6 +45,12 @@ function fnMoveQ(hs, hq, ds, dq) {
   let myState = update(state,
     ['screens', hs, 'questions', '$splice', [[hq, 1]]],
     ['screens', ds, 'questions', '$splice', [[dq, 0, hoverQ]]]);
+  return valState(myState, 'invalid question move');
+}
+
+function fnEditQ(s, q, value) {
+  let myState = update(state,
+    ['screens', s, 'questions', q, 'id', '$set', value]);
   return valState(myState, 'invalid question move');
 }
 

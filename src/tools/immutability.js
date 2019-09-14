@@ -1,3 +1,4 @@
+import { useState as useStateBase } from "react";
 import baseUpdate from 'immutability-helper'
 
 export default function update(state, ...args) {
@@ -24,4 +25,10 @@ function toObj(arr) {
   }
   o[arr.shift()] = arr.shift();
   return obj;
+}
+
+export function useState(orig) {
+  const [state, setStateBase] = useStateBase(orig);
+  const setState = (...x) => setStateBase(update(state, ...x));
+  return [state, setState];
 }
