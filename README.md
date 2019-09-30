@@ -4,10 +4,6 @@ The validation portion is the main thing here, which is handled in `./tools/vali
 
 If validation fails, the new state is discarded and an error message is added explaining why the update was aborted.
 
-Can be run via beanstalk here: 
-
-http://reactdrag-env.farxhez6zq.us-east-2.elasticbeanstalk.com/
-
 ## Usage instructions:
 - drag and drop screens/questions to reorder
 - click existing criteria to remove
